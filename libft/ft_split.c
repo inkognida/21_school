@@ -21,13 +21,19 @@ static int	words(char const *str, char c)
 	return (co);
 }
 
-static char	*word_str(const char *str, int s, int f)
+static char	*word_str(const char *str, int s, int f, char **split)
 {
 	char	*word;
 	int		i;
 
 	i = 0;
 	word = (char *)malloc(sizeof(char) * (f - s + 1));
+	if (!(word))
+	{
+		free(word);
+		free(split);
+		return (NULL);
+	}
 	while (s < f)
 		word[i++] = str[s++];
 	word[i] = '\0';
@@ -55,7 +61,7 @@ char	**ft_split(char const *s, char c)
 			flag = i;
 		else if ((s[i] == c || i == ft_strlen(s)) && flag >= 0)
 		{
-			split[j++] = word_str(s, flag, i);
+			split[j++] = word_str(s, flag, i, split);
 			flag = -1;
 		}
 	}
