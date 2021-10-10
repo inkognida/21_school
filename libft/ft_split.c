@@ -28,10 +28,33 @@ static char	*word_str(const char *str, int s, int f)
 
 	i = 0;
 	word = (char *)malloc(sizeof(char) * (f - s + 1));
+	if (!(word))
+		return (NULL);
 	while (s < f)
 		word[i++] = str[s++];
 	word[i] = '\0';
 	return (word);
+}
+
+static char	**free_split(char **split)
+{
+	int	i;
+
+	i = -1;
+	while (split[++i])
+		free(split[i]);
+	free(split);
+	return (NULL);
+}
+
+static char	**kostyl(char const *s, char c)
+{
+	char	**split;
+
+	if (!(s))
+		return (NULL);
+	split = (char **)malloc(sizeof(char *) * (words(s, c) + 1));
+	return (split);
 }
 
 char	**ft_split(char const *s, char c)
@@ -41,10 +64,8 @@ char	**ft_split(char const *s, char c)
 	int				flag;
 	char			**split;
 
-	if (!(s))
-		return (NULL);
-	split = (char **)malloc(sizeof(char *) * (words(s, c) + 1));
-	if (split == NULL)
+	split = kostyl(s, c);
+	if (!(split))
 		return (NULL);
 	i = -1;
 	j = 0;
@@ -55,7 +76,9 @@ char	**ft_split(char const *s, char c)
 			flag = i;
 		else if ((s[i] == c || i == ft_strlen(s)) && flag >= 0)
 		{
-			split[j++] = word_str(s, flag, i);
+			split[j] = word_str(s, flag, i);
+			if (!(split[j++]))
+				return (free_split(split));
 			flag = -1;
 		}
 	}
