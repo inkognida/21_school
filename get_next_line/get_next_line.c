@@ -5,116 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 11:24:42 by hardella          #+#    #+#             */
-/*   Updated: 2021/10/13 21:35:19 by hardella         ###   ########.fr       */
+/*   Created: 2021/10/14 12:43:06 by hardella          #+#    #+#             */
+/*   Updated: 2021/10/15 09:47:27 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#include <unistd.h>
-#include <stdio.h> // need to delete
+#include <string.h>
 
-static int	ft_strlen(char *s)
+static char	*gnl_main(int fd)
 {
-	int	i;
+	char	*line;
+	char	buff[BUFFER_SIZE + 1];
+	int		bytes;
+	char	*get_n;
+	static char	*remain;
+	int		flag;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-static int	ft_strchr(char *s, char c)
-{
-	int	i;
-
-	i = 0;
-	if (s == NULL)
-		return (0);
-	while (s[i])
+	flag = 1;
+	if (remain)
+		line = ft_strdup(remain);
+	else
+		line = new_str(1);
+	bytes = read(fd, buff, BUFFER_SIZE);
+	while (bytes && flag)
 	{
-		if (s[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-static char	*join(char *buffer, char *line)
-{
-	char	*str;
-	int		i;
-	int		j;
-
-	i = -1;
-	j = 0;
-	//printf("%s\n", buffer);
-	if (!(buffer))
-		return (NULL);
-	//printf("%s %s %d %d\n", line, buffer, ft_strlen(buffer), ft_strlen(line));
-	str = (char *)malloc(sizeof(char) * (ft_strlen(buffer) + \
-			ft_strlen(line) + 1));
-	if (!(str))
-		return (NULL);
-	while (line[++i])
-		str[i] = line[i];
-	while (buffer[j])
-	{
-		str[i] = buffer[j];
-		i++;
-		j++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-static char	*get_line(int fd, char *line)
-{
-	char	*buffer;
-	int		r;
-
-	r = 1;
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!(buffer))
-		return (NULL);
-	while (r > 0 && (ft_strchr(line, '\n')))
-	{
-		r = read(fd, buffer, BUFFER_SIZE);
-		if (r < 0)
+		buff[bytes] = '\0';
+		get_n = ft_strchr(buff, '\n');
+		if (get_n)
 		{
-			free(buffer);
-			return (NULL);
+			*get_n = '\0';
+			flag = 0;
+			get_n++;
+			remain = ft_strdup(get_n);
 		}
-		buffer[r] = '\0';
-		line = join(buffer, line);
-		if (!(line))
-			return (NULL);
+		line = ft_strjoin(line, buff);
+		bytes = read(fd, buff, BUFFER_SIZE);
 	}
-	free(buffer);
 	return (line);
 }
-
-// static char	*form_line(char *line)
-// {
-	
-// }
 
 char	*get_next_line(int fd)
-{
-	//char		*line_form;
-	static char	*line;
-	
+{	
+	char	*line;
+
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = get_line(fd, line);
+	line = gnl_main(fd);
 	if (!(line))
 		return (NULL);
-	// line_form = form_line(line);
-	//line = get_next_new_line(line);
 	return (line);
 }
-
 
 #include <stdio.h>
 #include <sys/stat.h>
