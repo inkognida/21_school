@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 10:57:34 by hardella          #+#    #+#             */
-/*   Updated: 2021/10/15 09:49:53 by hardella         ###   ########.fr       */
+/*   Updated: 2021/10/15 17:51:53 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,42 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[++i])
 		r[k + i] = s2[i];
 	r[k + i] = '\0';
+	free(s1);
 	return (r);
+}
+
+void	*ft_memcpy(void *dst, void *src, int n)
+{
+	char	*dest;
+	char	*source;
+
+	if (!(dst) && !(src))
+		return (NULL);
+	dest = (char *)dst;
+	source = (char *)src;
+	while (n > 0)
+	{
+		*dest = *source;
+		dest++;
+		source++;
+		n--;
+	}
+	return (dst);
+}
+
+int	ft_strlcpy(char *dst, char *src, int dstsize)
+{
+	int	srcm;
+
+	srcm = ft_strlen(src);
+	if (srcm + 1 < dstsize)
+		ft_memcpy(dst, src, srcm + 1);
+	else if (dstsize != 0)
+	{
+		ft_memcpy(dst, src, dstsize - 1);
+		dst[dstsize - 1] = '\0';
+	}
+	return (srcm);
 }
 
 char	*ft_strchr(char *s, int c)
@@ -58,28 +93,6 @@ char	*ft_strchr(char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(char *src)
-{
-	char	*copy;
-	int		i;
-	int		g;
-
-	i = 0;
-	g = 0;
-	while (src[i])
-		i++;
-	copy = (char *) malloc(sizeof(char) * (i + 1));
-	if (copy == NULL)
-		return (NULL);
-	while (src[g])
-	{
-		copy[g] = src[g];
-		g++;
-	}
-	copy[g] = '\0';
-	return (copy);
-}
-
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -88,20 +101,4 @@ int	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-char	*new_str(int b)
-{
-	char	*str;
-
-	str = (char *)malloc(sizeof(char) * (b + 1));
-	if (!(str))
-		return (NULL);
-	while (b)
-	{
-		*str = '\0';
-		str++;
-		b--;
-	}
-	return (str);
 }

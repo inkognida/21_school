@@ -6,63 +6,97 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 12:43:06 by hardella          #+#    #+#             */
-/*   Updated: 2021/10/15 09:47:27 by hardella         ###   ########.fr       */
+/*   Updated: 2021/10/15 20:11:43 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#include <string.h>
-
-static char	*gnl_main(int fd)
+static	char	*free_null(char **line)
 {
-	char	*line;
-	char	buff[BUFFER_SIZE + 1];
-	int		bytes;
-	char	*get_n;
-	static char	*remain;
-	int		flag;
+	free(*line);
+	return (NULL);
+}
 
-	flag = 1;
-	if (remain)
-		line = ft_strdup(remain);
+static int	get_read(int fd, char *buff)
+{
+	if (ft_strlen(buff))
+		return (ft_strlen(buff));
 	else
-		line = new_str(1);
-	bytes = read(fd, buff, BUFFER_SIZE);
-	while (bytes && flag)
+		return (read(fd, buff, BUFFER_SIZE));
+}
+
+static char	*final_line(char **line, char *buff)
+{
+	if (ft_strlen(*line) != 0)
 	{
-		buff[bytes] = '\0';
-		get_n = ft_strchr(buff, '\n');
-		if (get_n)
+		buff[0] = '\0';
+		return (*line);
+	}
+	*line = ft_strjoin(*line, buff);
+	buff[0] = '\0';
+	return (*line);
+}
+
+static char	*gnl_main(int fd, char *buff, char *line)
+{
+	int		r_b;
+	char	*g_n;
+
+	r_b = get_read(fd, buff);
+	if (r_b <= 0)
+		return (free_null(&line));
+	while (r_b)
+	{
+		buff[r_b] = '\0';
+		g_n = ft_strchr(buff, '\n');
+		if (g_n)
 		{
-			*get_n = '\0';
-			flag = 0;
-			get_n++;
-			remain = ft_strdup(get_n);
+			*g_n = '\0';
+			line = ft_strjoin(line, buff);
+			line = ft_strjoin(line, "\n");
+			ft_strlcpy(buff, ++g_n, BUFFER_SIZE);
+			return (line);
 		}
 		line = ft_strjoin(line, buff);
-		bytes = read(fd, buff, BUFFER_SIZE);
+		r_b = read(fd, buff, BUFFER_SIZE);
 	}
-	return (line);
+	return (final_line(&line, buff));
 }
 
 char	*get_next_line(int fd)
 {	
-	char	*line;
+	char		*line;
+	static char	buff[BUFFER_SIZE + 1];
 
+	line = (char *)malloc(sizeof(char) * 1);
+	if (!line)
+		return (NULL);
+	line[0] = '\0';
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	line = gnl_main(fd);
-	if (!(line))
-		return (NULL);
+		return (free_null(&line));
+	line = gnl_main(fd, buff, line);
 	return (line);
 }
 
-#include <stdio.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-int	main(void)
-{
-	int fd = open("file.txt", O_RDONLY);
-	printf("%s\n", get_next_line(fd));
-}
+// #include <string.h>
+// #include <stdio.h>
+// #include <sys/stat.h>
+// #include <fcntl.h>
+// int	main(void)
+// {
+// 	//char *r;
+// 	int fd = open("file.txt", O_RDONLY);
+// 	//r = get_next_line(fd);
+// 	char *s = get_next_line(fd);
+// 	char *q = get_next_line(fd);
+// 	printf("%s\n", s);
+// 	printf("%s\n", q);
+// 	// while (s)
+// 	// {
+// 	// 	printf("%s\n", s);
+// 	// 	s = get_next_line(fd);
+// 	// }
+// 	free(s);
+// 	free(q);
+// }
