@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 12:43:06 by hardella          #+#    #+#             */
-/*   Updated: 2021/10/15 20:11:43 by hardella         ###   ########.fr       */
+/*   Updated: 2021/10/16 21:27:06 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,6 @@ static int	get_read(int fd, char *buff)
 		return (ft_strlen(buff));
 	else
 		return (read(fd, buff, BUFFER_SIZE));
-}
-
-static char	*final_line(char **line, char *buff)
-{
-	if (ft_strlen(*line) != 0)
-	{
-		buff[0] = '\0';
-		return (*line);
-	}
-	*line = ft_strjoin(*line, buff);
-	buff[0] = '\0';
-	return (*line);
 }
 
 static char	*gnl_main(int fd, char *buff, char *line)
@@ -61,7 +49,8 @@ static char	*gnl_main(int fd, char *buff, char *line)
 		line = ft_strjoin(line, buff);
 		r_b = read(fd, buff, BUFFER_SIZE);
 	}
-	return (final_line(&line, buff));
+	buff[0] = '\0';
+	return (line);
 }
 
 char	*get_next_line(int fd)
@@ -79,24 +68,11 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// #include <string.h>
-// #include <stdio.h>
-// #include <sys/stat.h>
 // #include <fcntl.h>
-// int	main(void)
+// #include <stdio.h>
+// int main(void)
 // {
-// 	//char *r;
-// 	int fd = open("file.txt", O_RDONLY);
-// 	//r = get_next_line(fd);
-// 	char *s = get_next_line(fd);
-// 	char *q = get_next_line(fd);
-// 	printf("%s\n", s);
-// 	printf("%s\n", q);
-// 	// while (s)
-// 	// {
-// 	// 	printf("%s\n", s);
-// 	// 	s = get_next_line(fd);
-// 	// }
-// 	free(s);
-// 	free(q);
+// 	int	fd = open("file.txt", O_RDONLY);
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
 // }

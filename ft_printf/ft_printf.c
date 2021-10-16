@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 10:56:46 by hardella          #+#    #+#             */
-/*   Updated: 2021/10/15 17:37:18 by hardella         ###   ########.fr       */
+/*   Created: 2021/10/16 13:21:37 by hardella          #+#    #+#             */
+/*   Updated: 2021/10/16 21:27:41 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdarg.h>
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int	ft_printf(const char *str, ...)
 {
-	unsigned char	*dest;
-	unsigned char	*source;
+	va_list	arg;
 
-	if (!(dst) && !(src))
-		return (NULL);
-	dest = (unsigned char *)dst;
-	source = (unsigned char *)src;
-	while (n > 0)
-	{
-		*dest = *source;
-		dest++;
-		source++;
-		n--;
-	}
-	return (dst);
+	va_start(arg, str);
+		
+	
+	
 }
