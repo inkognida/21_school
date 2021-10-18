@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 13:21:37 by hardella          #+#    #+#             */
-/*   Updated: 2021/10/17 19:57:44 by hardella         ###   ########.fr       */
+/*   Updated: 2021/10/18 17:22:37 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,3 @@ int	ft_printf(const char *str, ...)
 	va_end(arg);
 	return (r_b);
 }
-
-//#include <stdio.h>
-//int main(void)
-//{
-//	// char *s = "aboba";
-//	int orig = printf("aboba %c\n");
-//	// int orig2 = printf("%p\n", s);
-//
-//	int my = ft_printf("aboba %c\n");
-//
-//	// printf("\n%p\n", s);
-//	// printf("%d %d\n", orig, my);
-//	// printf("%d\n", orig);
-//	// printf("%d\n", orig2);
-//
-//
-//	printf("%d", orig);
-//	printf("%d", my);
-//
-//
-//
-//	// printf("\n\n%x", 2147483647);
-//	// char *s = "aboba";
-//	// printf("%p\n", s);
-//
-//	return (0);
-//}

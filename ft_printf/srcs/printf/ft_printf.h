@@ -6,14 +6,13 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:07:52 by hardella          #+#    #+#             */
-/*   Updated: 2021/10/17 18:05:45 by hardella         ###   ########.fr       */
+/*   Updated: 2021/10/18 14:10:58 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdlib.h>
 # include <stdarg.h>
 # include <unistd.h>
 
