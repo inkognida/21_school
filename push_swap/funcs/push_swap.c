@@ -6,35 +6,51 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 21:45:24 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/10 17:33:11 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/12 20:32:43 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
+void	display(t_stack *stack_a)
+{
+	while (stack_a)
+	{
+		printf("%d ", stack_a->num);
+		stack_a = stack_a->next;
+	}
+	printf("\n");
+}
+
 int	main(int argc, char **argv)
 {
-	int	*stack_a;
-	int	*stack_b;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
-	stack_a = (int *)malloc(sizeof(int) * argc);
-	stack_b = (int *)malloc(sizeof(int) * argc);
-	error_input_malloc(stack_a, stack_b);
-	stack_a = pars_values(argv, argc, stack_a, stack_b);
-	
-	// for (int i = 0; i < argc - 1; i++)
-		// printf("%d\n", stack_a[i]);
-	ra(&stack_a, argc);
-	for (int i = 0; i < argc - 1; i++)
-		printf("%d\n", stack_a[i]);
-	// if (argc - 1 == 3)
-	// 	smallest_sort(stack_a, stack_b);
-	// if (argc - 1 == 5)
-	// 	second_sort(stack_a, stack_b);
-	// if (argc - 1 <= 100)
-	// 	big_sort(stack_a, stack_b);
-	// if (argc - 1 > 100 && argc - 1 <= 500)
-	// 	huge_sort(stack_a, stack_b);
-	// else
-	// 	return (write(2, "aboba\n", ft_strlen("aboba\n")));
+	stack_a = NULL;
+	stack_b = NULL;
+	get_stack(&stack_a, argv, argc);
+	if (argc == 4)
+		sort_three(&stack_a);
+	if (argc == 6)
+		sort_five(&stack_a, &stack_b);
+	// sa(&stack_a, 1);
+	// pb(&stack_a, &stack_b, 1);
+	// pb(&stack_a, &stack_b, 1);
+	// pb(&stack_a, &stack_b, 1);
+	// ra(&stack_a, 1);
+	// rb(&stack_b, 1);
+	// rra(&stack_a, 1);
+	// rrb(&stack_b, 1);
+	// sa(&stack_a, 1);
+	// pa(&stack_a, &stack_b, 1);
+	// pa(&stack_a, &stack_b, 1);
+	// pa(&stack_a, &stack_b, 1);
+
+	display(stack_a);
+
+
+	//fix leaks
+	// free_stack(&stack_a);
+	// free_stack(&stack_b);
 }

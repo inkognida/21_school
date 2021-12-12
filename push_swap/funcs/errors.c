@@ -6,33 +6,41 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 11:35:48 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/10 16:06:21 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/12 19:30:06 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
-void	error_input(int *stack_a, int *stack_b)
+void	free_stack(t_stack **stack_a)
 {
-	free(stack_a);
-	free(stack_b);
+	t_stack	*curr;
+	t_stack	*temp;
+
+	curr = *stack_a;
+	while (curr)
+	{
+		temp = curr->next;
+		free(curr);
+		curr = temp;
+	}
+}
+
+void	error_input(t_stack **stack_a)
+{
+	free_stack(stack_a);
 	write(2, "Error\n", 6);
 	exit(1);
 }
 
-void	error_input_empty(int *stack_a, int *stack_b)
+void	error_input_empty(t_stack **stack_a)
 {
-	free(stack_a);
-	free(stack_b);
+	free_stack(stack_a);
 	exit(1);
 }
 
-void	error_input_malloc(int *stack_a, int *stack_b)
+void	exit_list(t_stack **stack_a)
 {
-	if (!(stack_b) || !(stack_a))
-	{
-		write(2, "Malloc error\n", ft_strlen("Malloc error\n"));
-		exit(1);
-	}
-	return ;
+	free_stack(stack_a);
+	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 21:44:03 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/10 16:11:05 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/12 18:45:58 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,75 +37,53 @@ long int	atoi_ps(char *str)
 	return (sign * r);
 }
 
-int	not_in(int a, int *stack_a, int argc)
+int	not_in(t_stack *stack_a, int value)
 {
-	int	i;
+	while (stack_a)
+	{
+		if (stack_a->num == value)
+			return (0);
+		stack_a = stack_a->next;
+	}
+	return (1);
+}
 
-	i = 0;
+int	check_sort(t_stack *stack_a)
+{
+	while (stack_a->next != NULL)
+	{
+		if (stack_a->num > stack_a->next->num)
+			return (0);
+		else
+			stack_a = stack_a->next;
+	}
+	return (1);
+}
+
+void	get_stack(t_stack **stack_a, char **argv, int argc)
+{
+	int					i;
+	long int			n;
+
+	if (argc <= 2)
+		error_input_empty(stack_a);
+	i = 1;
 	while (i < argc)
 	{
-		if (stack_a[i] == a)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	check_errors(int *stack_a, int argc)
-{
-	int	i;
-	int	flag;
-
-	flag = 0;
-	i = 0;
-	while (argc - 2 > 0)
-	{
-		if (stack_a[i] < stack_a[i + 1])
+		if (ft_isint(argv[i]) && argv[i][0] == '0' && not_in(*stack_a, 0) && \
+			ft_strlen(argv[i]) == 1)
 		{
+			push_back(stack_a, 0);
 			i++;
-			argc--;
 			continue ;
 		}
+		n = atoi_ps(argv[i]);
+		if (n && min_max(n) && not_in(*stack_a, n) && ft_isint(argv[i]))
+			push_back(stack_a, n);
 		else
-			flag = 1;
-		i++;
-		argc--;
-	}
-	if (flag == 0)
-		return (0);
-	return (1);
-}
-
-int	check_max_min(long int a)
-{
-	if (a > 2147483647 || a < -2147483648)
-		return (0);
-	return (1);
-}
-
-int	*pars_values(char **argv, int argc, int *stack_a, int *stack_b)
-{
-	int			i;
-	long int	number;
-
-	i = 0;
-	number = 0;
-	while (i < argc - 1)
-	{
-		if (argv[i + 1][0] == '0' && ft_strlen(argv[i + 1]) == 1 \
-			&& not_in(0, stack_a, i))
-		{
-			stack_a[i++] = 0;
-			continue ;
-		}
-		number = atoi_ps(argv[i + 1]);
-		if (number && not_in(number, stack_a, i) && check_max_min(number))
-			stack_a[i] = number;
-		else
-			error_input(stack_a, stack_b);
+			error_input(stack_a);
 		i++;
 	}
-	if (!(check_errors(stack_a, argc)))
-		error_input_empty(stack_a, stack_b);
-	return (stack_a);
+	if (check_sort(*stack_a) == 1)
+		error_input_empty(stack_a);
 }
