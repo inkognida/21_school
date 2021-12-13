@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 21:45:24 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/12 20:32:43 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:51:16 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int	main(int argc, char **argv)
 	get_stack(&stack_a, argv, argc);
 	if (argc == 4)
 		sort_three(&stack_a);
-	if (argc == 6)
+	else if (argc == 6)
 		sort_five(&stack_a, &stack_b);
+	else if (argc > 6 && argc <= 101)
+		sort_one(&stack_a, &stack_b);
 	// sa(&stack_a, 1);
 	// pb(&stack_a, &stack_b, 1);
 	// pb(&stack_a, &stack_b, 1);
@@ -47,10 +49,14 @@ int	main(int argc, char **argv)
 	// pa(&stack_a, &stack_b, 1);
 	// pa(&stack_a, &stack_b, 1);
 
+	printf("stack_a: ");
 	display(stack_a);
+	printf("\n");
+	printf("stack_b: ");
+	display(stack_b);
 
 
 	//fix leaks
-	// free_stack(&stack_a);
-	// free_stack(&stack_b);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 }

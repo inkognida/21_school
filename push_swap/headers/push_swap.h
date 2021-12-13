@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 21:46:32 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/12 20:35:01 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:51:17 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_stack
 void		display(t_stack *stack_a);
 void		sort_three(t_stack **stack_a);
 void		sort_five(t_stack **stack_a, t_stack **stack_b);
+void		sort_one(t_stack **stack_a, t_stack **stack_b);
 void		help_sort(int n1, int n2, t_stack **stack_a, t_stack **stack_b);
 
 long int	atoi_ps(char *str);
@@ -61,4 +62,12 @@ void		rrr(t_stack **stack_a, t_stack **stack_b, int f);
 void		pa(t_stack **stack_a, t_stack **stack_b, int f);
 void		pb(t_stack **stack_a, t_stack **stack_b, int f);
 
+int			get_index(t_stack **stack_a, int elem);
+int			get_min(t_stack	**stack_a);
+int			get_max(t_stack	**stack_a);
+void		apply_min(t_stack **stack_a, t_stack **stack_b, int min);
+void		apply_max(t_stack **stack_a, t_stack **stack_b, int max);
+
+int			get_max_elem(t_stack	**stack_a);
+int			get_min_elem(t_stack	**stack_a);
 #endif
