@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 11:35:48 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/12 19:30:06 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/19 23:05:29 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,14 @@ void	error_input_empty(t_stack **stack_a)
 void	exit_list(t_stack **stack_a)
 {
 	free_stack(stack_a);
+	exit(1);
+}
+
+void	error_bonus(char *cmd, t_stack **stack_a, t_stack **stack_b)
+{
+	write(2, "Error\n", ft_strlen("Error\n"));
+	free(cmd);
+	free_stack(stack_a);
+	free_stack(stack_b);
 	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 21:46:32 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/13 17:51:17 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/19 13:59:52 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct s_stack
 {
 	int				num;
+	int				moves;
 	struct s_stack	*next;
 }				t_stack;
 
@@ -70,4 +71,21 @@ void		apply_max(t_stack **stack_a, t_stack **stack_b, int max);
 
 int			get_max_elem(t_stack	**stack_a);
 int			get_min_elem(t_stack	**stack_a);
+int			next_min(t_stack **stack_a, int min);
+
+int			get_median(t_stack **stack_a);
+void		get_two_stacks(t_stack **stack_a, t_stack **stack_b, int median);
+int			moves_a(int num, t_stack *stack_a);
+int			moves_b(int num, t_stack *stack_b);
+void		total_moves(t_stack *stack_a, t_stack *stack_b);
+void		rotate_cases(t_stack **stack_a, t_stack **stack_b, int *a, int *b);
+void		rotate(t_stack **stack_a, t_stack **stack_b);
+void		a_rotate(t_stack **stack_a);
+
+void		error_bonus(char *cmd, t_stack **stack_a, t_stack **stack_b);
+void		ok_ko(int flag, char *cmd, t_stack **stack_a, t_stack **stack_b);
+int			parse_command(char **cmd);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+void		accept_cmd(t_stack **stack_a, t_stack **stack_b, char *cmd);
+
 #endif
