@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 11:12:37 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/17 17:15:05 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/20 11:56:22 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,49 +28,50 @@ int	next_min(t_stack **stack_a, int min)
 	return (n_min);
 }
 
-int	get_median(t_stack **stack_a)
+int	get_median(t_stack *stack_a)
 {
 	int	i;
-	int	len;
 	int	median;
 
-	len = ft_lstsize(*stack_a);
+	median = get_min_elem(&stack_a);
 	i = 0;
-	while (i < len / 2)
+	while (i < ft_lstsize(stack_a) / 2)
 	{
-		median = next_min(stack_a, median);
+		median = next_min(&stack_a, median);
 		i++;
 	}
 	return (median);
 }
 
-void	rotate_cases(t_stack **stack_a, t_stack **stack_b, int *a, int *b)
+void	rotate_cases(t_stack **stack_a, t_stack **stack_b, t_stack *put_to)
 {
-	if (*a < 0 && *b < 0)
-		while (*a < 5500 && *b < 5500 && (*a)++ < 0 && (*b)++ < 0)
+	int	a;
+	int	b;
+
+	a = moves_a(put_to->num, *stack_a);
+	b = moves_b(put_to->num, *stack_b);
+	if (a < 0 && b < 0)
+		while (a < 0 && b < 0 && a++ < 5500 && b++ < 5500)
 			rrr(stack_a, stack_b, 1);
-	else if (*a > 0 && *b > 0)
-		while (*a > 5500 && *b > 5500 && (*a)-- > 0 && (*b)-- > 0)
+	else if (a > 0 && b > 0)
+		while (a > 0 && b > 0 && a-- < 5500 && b-- < 5500)
 			rr(stack_a, stack_b, 1);
-	if (*a < 0)
-		while ((*a)++)
+	if (a < 0)
+		while (a++)
 			rra(stack_a, 1);
 	else
-		while ((*a)--)
+		while (a--)
 			ra(stack_a, 1);
-	if (*b < 0)
-		while ((*b)++)
+	if (b < 0)
+		while (b++)
 			rrb(stack_b, 1);
 	else
-		while ((*b)--)
+		while (b--)
 			rb(stack_b, 1);
-	pa(stack_a, stack_b, 1);
 }
 
 void	rotate(t_stack **stack_a, t_stack **stack_b)
 {
-	int		a;
-	int		b;
 	t_stack	*put_to;
 	t_stack	*tmp;
 
@@ -82,9 +83,8 @@ void	rotate(t_stack **stack_a, t_stack **stack_b)
 			put_to = tmp;
 		tmp = tmp->next;
 	}
-	a = moves_a(put_to->num, *stack_a);
-	b = moves_b(put_to->num, *stack_b);
-	rotate_cases(stack_a, stack_b, &a, &b);
+	rotate_cases(stack_a, stack_b, put_to);
+	pa(stack_a, stack_b, 1);
 }
 
 void	a_rotate(t_stack **stack_a)

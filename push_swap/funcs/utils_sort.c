@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:38:21 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/13 16:03:22 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/20 11:12:10 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	get_max_elem(t_stack	**stack_a)
 	max = tmp->num;
 	while (tmp)
 	{
-		if (max <= tmp->num)
+		if (max < tmp->num)
 			max = tmp->num;
 		tmp = tmp->next;
 	}
@@ -86,7 +86,7 @@ int	get_min_elem(t_stack	**stack_a)
 	min = tmp->num;
 	while (tmp)
 	{
-		if (min >= tmp->num)
+		if (min > tmp->num)
 			min = tmp->num;
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:51:52 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/19 23:05:03 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/20 12:35:55 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,28 @@ void	get_two_stacks(t_stack **stack_a, t_stack **stack_b, int median)
 		}
 	}
 	if ((*stack_a)->num > (*stack_a)->next->num)
-		sa(stack_a, 1);
+		ra(stack_a, 1);
 }
 
 int	moves_a(int num, t_stack *stack_a)
 {
 	int	c;
 	int	size;
-	int	local_min;
+	int	min;
 
 	size = ft_lstsize(stack_a);
-	local_min = get_min_elem(&stack_a);
+	min = get_min_elem(&stack_a);
 	c = 0;
-	if (num < local_min && local_min == stack_a->num)
+	if (stack_a->num == min && num < stack_a->num)
 		return (0);
 	if (stack_a->num > num && ft_lstlast(stack_a)->num < num)
 		return (0);
 	while (stack_a->next)
 	{
 		c++;
-		if ((num < stack_a->next->num && stack_a->next->num == local_min) || \
-			stack_a->num < num && (stack_a->next->num > num || \
-			stack_a->next->num == local_min))
+		if ((num < stack_a->next->num && stack_a->next->num == min) || \
+			(stack_a->num < num && (stack_a->next->num > num || \
+			stack_a->next->num == min)))
 			break ;
 		stack_a = stack_a->next;
 	}
@@ -89,7 +89,7 @@ void	total_moves(t_stack *stack_a, t_stack *stack_b)
 	{
 		moves_sa = moves_a(stack_b->num, stack_a);
 		if (moves_sa < 0)
-			moves_sa = moves_sa * -1;
+			moves_sa *= -1;
 		if (c < size / 2)
 			stack_b->moves = c + moves_sa;
 		else
@@ -101,7 +101,7 @@ void	total_moves(t_stack *stack_a, t_stack *stack_b)
 
 void	sort_one(t_stack **stack_a, t_stack **stack_b)
 {
-	get_two_stacks(stack_a, stack_b, get_median(stack_a));
+	get_two_stacks(stack_a, stack_b, get_median(*stack_a));
 	while (ft_lstsize(*stack_b) > 0)
 	{
 		total_moves(*stack_a, *stack_b);

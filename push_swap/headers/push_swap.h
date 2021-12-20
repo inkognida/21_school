@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 21:46:32 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/19 13:59:52 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/20 12:35:53 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# include <stdio.h>  //need to delete
-
 typedef struct s_stack
 {
 	int				num;
@@ -25,7 +23,6 @@ typedef struct s_stack
 	struct s_stack	*next;
 }				t_stack;
 
-void		display(t_stack *stack_a);
 void		sort_three(t_stack **stack_a);
 void		sort_five(t_stack **stack_a, t_stack **stack_b);
 void		sort_one(t_stack **stack_a, t_stack **stack_b);
@@ -73,19 +70,19 @@ int			get_max_elem(t_stack	**stack_a);
 int			get_min_elem(t_stack	**stack_a);
 int			next_min(t_stack **stack_a, int min);
 
-int			get_median(t_stack **stack_a);
+int			get_median(t_stack *stack_a);
 void		get_two_stacks(t_stack **stack_a, t_stack **stack_b, int median);
 int			moves_a(int num, t_stack *stack_a);
 int			moves_b(int num, t_stack *stack_b);
 void		total_moves(t_stack *stack_a, t_stack *stack_b);
-void		rotate_cases(t_stack **stack_a, t_stack **stack_b, int *a, int *b);
+void		rotate_cases(t_stack **stack_a, t_stack **stack_b, t_stack *put_to);
 void		rotate(t_stack **stack_a, t_stack **stack_b);
 void		a_rotate(t_stack **stack_a);
 
 void		error_bonus(char *cmd, t_stack **stack_a, t_stack **stack_b);
 void		ok_ko(int flag, char *cmd, t_stack **stack_a, t_stack **stack_b);
 int			parse_command(char **cmd);
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strncmp(char *s1, char *s2, int n);
 void		accept_cmd(t_stack **stack_a, t_stack **stack_b, char *cmd);
 
 #endif

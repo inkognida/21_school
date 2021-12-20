@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:49:23 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/19 14:05:44 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/20 12:52:25 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ok_ko(int flag, char *cmd, t_stack **stack_a, t_stack **stack_b)
 {
 	if (flag == 911)
 	{
-		write(1, "KO\n", ft_strlen("KO\n"));
+		write(2, "KO\n", ft_strlen("KO\n"));
 		free_stack(stack_a);
 		free_stack(stack_b);
 		free(cmd);
@@ -54,15 +54,15 @@ int	parse_command(char **cmd)
 	return (1);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(char *s1, char *s2, int n)
 {
-	size_t			i;
-	unsigned char	*r1;
-	unsigned char	*r2;
-	unsigned int	check;
+	int				i;
+	char			*r1;
+	char			*r2;
+	int				check;
 
-	r1 = (unsigned char *) s1;
-	r2 = (unsigned char *) s2;
+	r1 = (char *) s1;
+	r2 = (char *) s2;
 	i = 0;
 	while ((r1[i] || r2[i]) && i < n)
 	{
@@ -111,7 +111,7 @@ int	main(int argc, char **argv)
 	char	*cmd;
 
 	cmd = (char *)malloc(sizeof(char) * 4);
-	if (!cmd)
+	if (!cmd || argc == 1)
 		exit(1);
 	stack_a = NULL;
 	stack_b = NULL;

@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 13:48:44 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/19 23:05:26 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/20 11:09:11 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_stack	*create(t_stack **stack_a, int value)
 		exit_list(stack_a);
 	list->num = value;
 	list->next = NULL;
+	list->moves = 0;
 	return (list);
 }
 

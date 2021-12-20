@@ -6,21 +6,11 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 21:45:24 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/19 13:53:31 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/20 12:35:58 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
-
-void	display(t_stack *stack_a)
-{
-	while (stack_a)
-	{
-		printf("%d ", stack_a->num);
-		stack_a = stack_a->next;
-	}
-	printf("\n");
-}
 
 int	main(int argc, char **argv)
 {
