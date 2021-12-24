@@ -1,4 +1,6 @@
-SRCS	=	./funcs/fractol.c ./funcs/utils.c
+SRCS	=	./funcs/fractol.c ./funcs/utils.c ./funcs/pars_init.c \
+			./funcs/julia.c ./funcs/colors.c ./funcs/key_mouse.c \
+			./funcs/mandelbrot.c
 
 SRCS_B	= 	./funcs/fractol.c
 
