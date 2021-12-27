@@ -6,11 +6,10 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 18:48:39 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/24 20:14:35 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/27 14:35:28 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "../headers/fractol.h"
 
 void	my_mlx_pixel_put(t_f *f, int x, int y, int color)

@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 19:43:10 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/24 19:55:35 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/27 14:11:54 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	help(void)
 {
 	printf("usage: ./f [name]\n");
 	printf("avaliable names:\n\t 1) Mandelbrot\n\t");
-	printf(" 2) Julia\n\t 3) Julia1\n\t 4) Julia2 \n");
+	printf(" 2) Julia\n\t 3) Julia1\n\t 4) Julia2 \n\t 5) Tricorn \n");
 }
 
 void	get_f(char *f_name)
@@ -44,6 +44,8 @@ void	get_f(char *f_name)
 		julia(1);
 	else if (ft_strncmp(f_name, "Julia2", ft_strlen(f_name)) == 0)
 		julia(2);
+	else if (ft_strncmp(f_name, "Tricorn", ft_strlen(f_name)) == 0)
+		bonus(3);
 	else
 		help();
 }

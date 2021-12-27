@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:46:35 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/24 20:16:06 by hardella         ###   ########.fr       */
+/*   Updated: 2021/12/27 14:35:09 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # define WIDTH		500
 # define HEIGHT		500
+# define SCALE		2;
 
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <math.h>
 # include "mlx.h"
 
 typedef struct s_complex{
@@ -41,13 +41,6 @@ typedef struct s_image
 	int		endian;
 }					t_image;
 
-/*
-c - const, i - iteration, z - param of formula
-temp - param for formula, 
-zoom - scaling 
-z_axis - axis of scale
-
-*/
 typedef struct s_fractol
 {
 	void			*mlx;
@@ -67,6 +60,7 @@ typedef struct s_fractol
 	double			temp;
 	int				i;
 	int				name;
+	int				bonus_key;
 }				t_f;
 
 int			ft_strncmp(char *s1, char *s2, int n);
@@ -91,5 +85,10 @@ void		draw_julia(t_f *f);
 void		get_julia_values(t_f *f);
 void		draw(t_f *f);
 int			escape_hook(int key, t_f *f);
+void		get_bonus_values(t_f *f);
+void		draw_bonus(t_f *f);
+void		bonus(int key);
+void		draw_bonus_color(t_f *f);
+int			color_hook(int key, t_f *f);
 
 #endif
