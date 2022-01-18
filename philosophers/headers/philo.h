@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 12:37:16 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/28 16:59:33 by hardella         ###   ########.fr       */
+/*   Updated: 2022/01/18 08:34:28 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,38 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <stdlib.h>
+# include <time.h>
+
 # include <stdio.h>
 
-typedef struct s_phio
-{
-	int	eat_time;
-	int	die_time;
-	int	sleep_time;
-	int	total_philos;
-	int	must_eat_times;
+# define MIN -2147483648
+# define MAX 2147483647
 
-}				t_philo;
+typedef struct s_p
+{
+	int	nb;
+	int	et;
+	int	dt;
+	int	st;
+	int	met;
+}				t_p;
+
+typedef struct s_ph
+{
+	int				id;
+	pthread_t		tid;
+	pthread_mutex_t	f;
+	pthread_mutex_t	*nf;
+	int				die;
+	t_p				*arg;
+}				t_ph;
 
 int			ft_strlen(char *str);
-long int	is_num(char *num);
-int			check_arg(char *num);
-void		pars_init(int argc, char **argv);
+void		pars_init(int argc, char **argv, t_p *arg);
 void		error_input(void);
-void		accept(int f, int i);
+void		accept(int value, t_p *arg, int index);
+int			exc(long int value, int f);
+int			ft_atoi(char *str, int f);
+int			get_time(void);
 
 #endif

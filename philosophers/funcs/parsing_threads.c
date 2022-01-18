@@ -6,61 +6,80 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 13:09:25 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/28 17:59:40 by hardella         ###   ########.fr       */
+/*   Updated: 2022/01/18 06:07:47 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/philo.h"
 
-long int	is_num(char *num)
+int	exc(long int value, int f)
 {
-	int	i;
-
-	i = 0;
-	while (num[i])
-	{
-		if (num[i] >= 48 && num[i] <= 57)
-		{
-			i++;
-			continue ;
-		}
-		return (0);
-	}
-	return (1);
-}
-
-int	min_max(long int a)
-{
-	if (a > 2147483647 || a < -2147483648)
-		return (0);
-	return (1);
-}
-
-int	check_arg(char *num)
-{
-	if (is_num(num) && min_max(is_num(num)))
-		return (is_num(num));
+	if (f == 1 && value > 0 && value <= 200)
+		return (1);
+	else if (f == 2 && value >= 60)
+		return (1);
+	else if (f == 3 && value >= 60)
+		return (1);
+	else if (f == 4 && value >= 60)
+		return (1);
+	else if (f == 5 && value > 0)
+		return (1);
 	else
 		return (0);
 }
 
-void	accept(int f, int i)
+int	ft_atoi(char *str, int f)
 {
-	(void)f;
-	(void)i;
+	long int	i;
+	long int	sign;
+	long int	r;
+
+	sign = 1;
+	r = 0;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		r = r * 10 + (str[i] - '0');
+		i++;
+	}
+	if (!exc(sign * r, f) && (sign * r < MAX) && (sign * r > MIN))
+		return (0);
+	return (sign * r);
 }
 
-void	pars_init(int argc, char **argv)
+void	accept(int value, t_p *arg, int index)
+{
+	if (index == 1)
+		arg->nb = value;
+	else if (index == 2)
+		arg->dt = value;
+	else if (index == 3)
+		arg->et = value;
+	else if (index == 4)
+		arg->st = value;
+	else if (index == 5)
+		arg->met = value;
+}
+
+void	pars_init(int argc, char **argv, t_p *arg)
 {
 	int	i;
-	int	f;
+	int	v;
 
 	i = 1;
 	while (i < argc)
 	{
-		f = check_arg(argv[i]);
-		if (f)
-			accept(f, i);
+		v = ft_atoi(argv[i], i);
+		if (v)
+			accept(v, arg, i);
 		else
 			error_input();
 		i++;
