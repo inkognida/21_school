@@ -31,3 +31,5 @@ fclean: clean
 	${REM} ${SRCS_OBJ} ${NAME}
 
 re:	fclean all
+
+# -fsanitize=address

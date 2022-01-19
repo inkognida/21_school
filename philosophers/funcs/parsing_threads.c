@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 13:09:25 by hardella          #+#    #+#             */
-/*   Updated: 2022/01/18 06:07:47 by hardella         ###   ########.fr       */
+/*   Updated: 2022/01/19 23:33:42 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ int	ft_atoi(char *str, int f)
 	sign = 1;
 	r = 0;
 	i = 0;
+	while (str[i])
+		if (str[i] > '9' || str[i++] < '0')
+			return (0);
+	i = 0;
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
@@ -46,10 +50,7 @@ int	ft_atoi(char *str, int f)
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
-	{
-		r = r * 10 + (str[i] - '0');
-		i++;
-	}
+		r = r * 10 + (str[i++] - '0');
 	if (!exc(sign * r, f) && (sign * r < MAX) && (sign * r > MIN))
 		return (0);
 	return (sign * r);
@@ -69,7 +70,7 @@ void	accept(int value, t_p *arg, int index)
 		arg->met = value;
 }
 
-void	pars_init(int argc, char **argv, t_p *arg)
+int	pars_init(int argc, char **argv, t_p *arg)
 {
 	int	i;
 	int	v;
@@ -81,7 +82,8 @@ void	pars_init(int argc, char **argv, t_p *arg)
 		if (v)
 			accept(v, arg, i);
 		else
-			error_input();
+			return (0);
 		i++;
 	}
+	return (1);
 }
