@@ -6,11 +6,21 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 13:09:25 by hardella          #+#    #+#             */
-/*   Updated: 2022/01/19 23:33:42 by hardella         ###   ########.fr       */
+/*   Updated: 2022/01/20 22:15:23 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/philo.h"
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
 int	exc(long int value, int f)
 {
