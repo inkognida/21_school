@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 12:18:16 by hardella          #+#    #+#             */
-/*   Updated: 2022/01/20 22:27:13 by hardella         ###   ########.fr       */
+/*   Updated: 2022/01/21 19:15:34 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	game(t_ph *philo)
 	print(FORK, philo->arg, philo->id);
 	pthread_mutex_lock(&philo->max->mutex);
 	print(FORK, philo->arg, philo->id);
-	philo->die_time = get_time() + philo->arg->dt;
+	philo->die_time = philo->die_time + philo->arg->dt;
 	print(EAT, philo->arg, philo->id);
 	usleep(philo->arg->et * 1000);
 	pthread_mutex_unlock(&philo->max->mutex);

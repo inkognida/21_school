@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 12:37:16 by hardella          #+#    #+#             */
-/*   Updated: 2022/01/20 22:26:54 by hardella         ###   ########.fr       */
+/*   Updated: 2022/01/21 21:23:15 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <pthread.h>
 # include <stdlib.h>
 # include <sys/time.h>
-
 # include <stdio.h>
 
 # define MIN -2147483648
