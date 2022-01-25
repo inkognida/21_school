@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 13:09:25 by hardella          #+#    #+#             */
-/*   Updated: 2022/01/20 22:15:23 by hardella         ###   ########.fr       */
+/*   Updated: 2022/01/21 21:24:00 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	pars_init(int argc, char **argv, t_p *arg)
 	int	v;
 
 	i = 1;
+	arg->met = 0;
 	while (i < argc)
 	{
 		v = ft_atoi(argv[i], i);
