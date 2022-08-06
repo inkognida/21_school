@@ -2,7 +2,7 @@ SRCS	=	./funcs/fractol.c ./funcs/utils.c ./funcs/pars_init.c \
 			./funcs/julia.c ./funcs/colors.c ./funcs/key_mouse.c \
 			./funcs/mandelbrot.c ./funcs/bonus.c
 
-OBJ_SRC = ${SRCS:.c=.o}
+OBJS = ${SRCS:.c=.o}
 
 CC = gcc
 
@@ -12,24 +12,23 @@ REM = rm -f
 
 HEADER = ./headers/fractol.h
 
-FLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
-.PHONY: all clean fclean re
+.PHONY: 	clean fclean all re bonus
 
-%.o:	%.c ${HEADER}
-			${CC} ${FLAGS} -Imlx -c $< -o $@
+all:		$(NAME)
 
-${NAME}: ${OBJ_SRC}
-			${CC} ${FLAGS} ${OBJ_SRC} -lmlx -framework OpenGL -framework AppKit -o ${NAME}
+.c.o:
+			gcc $(CFLAGS) -c $< -o $@
 
-all: ${NAME}
-
-bonus: all
+$(NAME):	$(OBJS)
+			make -C ./MinilibX
+			gcc -o $(NAME) $(OBJS) $(CFLAGS) -lmlx -L./MinilibX -framework OpenGL -framework AppKit
 
 clean:
-	${REM} ${OBJ_SRC} ${OBJ_B}
+			rm -f $(OBJS)
 
-fclean: clean
-	${REM} ${OBJ_SRC} ${OBJ_B} ${NAME} ${BONUS}
-	
-re: fclean all
+fclean: 	clean
+			rm -f $(NAME)
+
+re:			fclean all
