@@ -1,0 +1,15 @@
+Ready to be builded on M1
+
+To use x86:
+make fclean
+cd MinilibX 
+make fclean
+cd sierra && make fclean && make 
+
+refactort Makefile:
+    -lmlx -L./MinilibX/sierra
+
+refactor headers/fractol.h:
+    #include "../MinilibX/sierra/mlx.h"
+
+DONE!
