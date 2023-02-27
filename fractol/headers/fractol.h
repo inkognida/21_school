@@ -6,7 +6,7 @@
 /*   By: hardella <hardella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:46:35 by hardella          #+#    #+#             */
-/*   Updated: 2021/12/27 14:35:09 by hardella         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:33:47 by hardella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "mlx.h"
+# include "../MinilibX/X11/mlx.h"
 
 typedef struct s_complex{
 	double	r;
